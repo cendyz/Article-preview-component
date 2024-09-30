@@ -1,0 +1,243 @@
+@use "./utilities/reset";
+@use "./utilities/mixins" as mixins;
+
+:root {
+	--Very-Dark-Grayish-Blue: hsl(217, 19%, 35%);
+	--Desaturated-Dark-Blue: hsl(214, 17%, 51%);
+	--Grayish-Blue: hsl(212, 23%, 69%);
+	--Light-Grayish-Blue: hsl(210, 46%, 95%);
+	--white: #ffffff;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	font-family: "Manrope", sans-serif;
+	font-size: 13px;
+	background-color: var(--Light-Grayish-Blue);
+}
+
+.card {
+	position: relative;
+	width: 90%;
+	max-width: 325px;
+	background-color: var(--white);
+	border-radius: 0.5em;
+	box-shadow: 1px 0 3px var(--Grayish-Blue);
+	overflow: hidden;
+
+	&__bg {
+		display: none;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 75px;
+		background-color: var(--Desaturated-Dark-Blue);
+	}
+
+	&__img {
+		display: block;
+		width: 100%;
+		height: 220px;
+		object-fit: cover;
+		background-position: top;
+
+		&--desktop {
+			display: none;
+		}
+	}
+
+	&__bottom {
+		padding: 2.5em;
+		padding-bottom: 1.5em;
+	}
+
+	&__title {
+		margin-bottom: 1em;
+		font-size: 1.6rem;
+		color: var(--Very-Dark-Grayish-Blue);
+	}
+
+	&__text {
+		margin-bottom: 2em;
+		font-size: 1.32rem;
+		font-weight: 500;
+		line-height: 1.5;
+		color: var(--Desaturated-Dark-Blue);
+	}
+
+	&__box {
+		position: relative;
+		display: flex;
+		align-items: center;
+
+		&-img {
+			margin-right: 1.3em;
+			width: 40px;
+			border-radius: 50%;
+		}
+
+		&-name {
+			margin-bottom: 0.2em;
+			font-weight: 700;
+			color: var(--Very-Dark-Grayish-Blue);
+		}
+
+		&-date {
+			color: var(--Grayish-Blue);
+		}
+
+		&-btn {
+			margin-left: auto;
+			padding: 0.7em;
+			border-radius: 50%;
+			background-color: var(--Light-Grayish-Blue);
+
+			&--two {
+				background-color: var(--Grayish-Blue);
+			}
+
+			&-desktop {
+				display: none;
+			}
+
+			&--desktop {
+				display: none;
+			}
+		}
+	}
+
+	&__share-panel {
+		display: none;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		column-gap: 1.5em;
+		width: 100%;
+		height: 40px;
+		background-color: var(--Desaturated-Dark-Blue);
+		z-index: -10;
+
+		img {
+			cursor: pointer;
+		}
+
+		&-text {
+			text-transform: uppercase;
+			font-size: 1.2rem;
+			color: var(--Grayish-Blue);
+			font-weight: 500;
+			letter-spacing: 5px;
+		}
+	}
+}
+
+.panel-switch {
+	display: flex;
+	z-index: 10;
+}
+
+.bg-switch {
+	display: block;
+}
+
+@media (min-width: 992px) {
+	.card {
+		display: grid;
+		grid-template-columns: 1fr 1.5fr;
+		width: 70%;
+		max-width: 1010px;
+		overflow: visible;
+
+		&__img {
+			height: 100%;
+			z-index: 11;
+			border-bottom-left-radius: 0.5em;
+
+			&--mobile {
+				display: none;
+			}
+
+			&--desktop {
+				display: block;
+				background-position: left;
+			}
+		}
+
+		&__bottom {
+			padding: clamp(2em, 2.7vw, 3em);
+		}
+
+		&__title {
+			margin-bottom: 0.7em;
+			font-size: clamp(2rem, 2vw, 2.8rem);
+		}
+
+		&__text {
+			margin-bottom: 1.6em;
+			font-size: clamp(1.1rem, 1.1vw, 1.6rem);
+			letter-spacing: 1px;
+		}
+
+		&__box {
+			font-size: clamp(13px, 1vw, 1.5rem);
+			&-person {
+				margin-bottom: 0.3em;
+			}
+
+			&-img {
+				width: clamp(40px, 3.45vw, 50px);
+			}
+			&-btn {
+				padding: clamp(0.7em, 0.9vw, 1em);
+
+				&--mobile {
+					display: none;
+				}
+
+				&--desktop {
+					position: relative;
+					display: block;
+				}
+
+				&-desktop {
+					display: none;
+					align-items: center;
+					column-gap: 1em;
+					@include mixins.panel-desktop;
+					padding: 1em 2em;
+					border-radius: 0.8em;
+					background-color: var(--Desaturated-Dark-Blue);
+					cursor: default;
+					z-index: 100;
+
+					img {
+						cursor: pointer;
+						z-index: 100;
+					}
+
+					&::before {
+						content: "";
+						@include mixins.panel-desktop;
+						padding: 1em;
+						top: 55%;
+						left: 43.5%;
+						transform: rotate(45deg);
+						background-color: var(--Desaturated-Dark-Blue);
+						z-index: 10;
+					}
+				}
+			}
+		}
+		&__share-panel {
+			&-text {
+				font-size: 1.1rem;
+			}
+		}
+	}
+}
