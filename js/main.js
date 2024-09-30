@@ -45,14 +45,19 @@ const widthCheck = () => {
 	}
 };
 
+const isClickedOutside = (target, elements) => {
+	return elements.every(el => el !== target && !el.contains(target));
+};
+
 mobileBtn.addEventListener("click", showPanel);
 desktopBtn.addEventListener("click", handleDesktop);
 window.addEventListener("resize", widthCheck);
 document.addEventListener("click", e => {
-	if (!panel.contains(e.target) && e.target !== mobileBtn && e.target !== mobileBtnImg) {
+	if (isClickedOutside(e.target, [panel, mobileBtn, mobileBtnImg])) {
 		hidePanel();
 	}
-	if (!desktopPanel.contains(e.target) && e.target !== desktopBtn) {
+
+	if (isClickedOutside(e.target, [desktopPanel, desktopBtn])) {
 		hidePanelDekstop();
 	}
 });
