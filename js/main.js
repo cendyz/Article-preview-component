@@ -56,7 +56,7 @@ document.addEventListener("click", e => {
 	if (isClickedOutside(e.target, [panel, mobileBtn, mobileBtnImg])) {
 		hidePanel();
 	}
-
+	
 	if (isClickedOutside(e.target, [desktopPanel, desktopBtn])) {
 		hidePanelDekstop();
 	}
